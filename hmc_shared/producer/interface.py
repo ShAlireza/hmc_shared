@@ -20,7 +20,7 @@ class Producer:
     def produce(self, *args, **kwargs):
         raise NotImplementedError
 
-    def get_next_batch(self):
+    def get_next_batch(self, *args, **kwargs):
         raise NotImplementedError
 
     def push_to_queue(self, data):
