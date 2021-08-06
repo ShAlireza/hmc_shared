@@ -24,6 +24,14 @@ class RabbitmqHandler:
             )
         )
 
+    def pull(self, routing_key, callback_func):
+        self.channel.basic_consume(
+            queue=routing_key,
+            on_message_callback=callback_func,
+            auto_ack=False
+        )
+        self.channel.start_consuming()
+
     def create_connection(self):
         return pika.BlockingConnection(
             parameters=pika.ConnectionParameters(

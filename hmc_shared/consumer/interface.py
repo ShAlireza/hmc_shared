@@ -10,15 +10,7 @@ class Consumer:
             rabbitmq_host=rabbitmq_host,
             rabbitmq_port=rabbitmq_port
         )
-        self.start_consumer()
-
-    def start_consumer(self):
-        self.rabbitmq_handler.channel.basic_consume(
-            queue=self.kind,
-            on_message_callback=self.callback,
-            auto_ack=False
-        )
-        self.rabbitmq_handler.channel.start_consuming()
+        self.rabbitmq_handler.pull(self.kind, self.callback)
 
     def callback(self, ch, method, properties, body):
         self.process(body)
