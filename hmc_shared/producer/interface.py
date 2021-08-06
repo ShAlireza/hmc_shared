@@ -25,7 +25,7 @@ class Producer:
         raise NotImplementedError
 
     def request(self, url):
-        pass
+        raise NotImplementedError
 
     def generate_next_url(self):
         raise NotImplementedError
