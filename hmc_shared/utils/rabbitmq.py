@@ -24,11 +24,11 @@ class RabbitmqHandler:
             )
         )
 
-    def pull(self, routing_key, callback_func):
+    def pull(self, routing_key, callback_func, auto_ack=False):
         self.channel.basic_consume(
             queue=routing_key,
             on_message_callback=callback_func,
-            auto_ack=False
+            auto_ack=auto_ack
         )
         self.channel.start_consuming()
 
