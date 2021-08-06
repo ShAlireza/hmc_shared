@@ -31,3 +31,7 @@ class Producer:
             routing_key=self.kind,
             data=data
         )
+
+    @staticmethod
+    def prepare_data(last_response):
+        raise NotImplementedError
