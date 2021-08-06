@@ -23,7 +23,7 @@ class Producer:
     def request(self, *args, **kwargs):
         raise NotImplementedError
 
-    def prepare_next_request(self):
+    def prepare_next_request(self, *args, **kwargs):
         raise NotImplementedError
 
     def push_to_queue(self, data):
