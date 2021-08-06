@@ -1,4 +1,5 @@
 from hmc_shared.utils import RabbitmqHandler
+import requests
 
 
 class ProducerKinds:
@@ -21,6 +22,12 @@ class Producer:
         raise NotImplementedError
 
     def get_next_batch(self, *args, **kwargs):
+        raise NotImplementedError
+
+    def request(self, url):
+        pass
+
+    def generate_next_url(self):
         raise NotImplementedError
 
     def push_to_queue(self, data):
