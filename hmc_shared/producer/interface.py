@@ -16,6 +16,7 @@ class Producer:
             rabbitmq_host=rabbitmq_host,
             rabbitmq_port=rabbitmq_port
         )
+        self.rabbitmq_handler.create_queues([self.kind])
 
     def produce(self, *args, **kwargs):
         raise NotImplementedError

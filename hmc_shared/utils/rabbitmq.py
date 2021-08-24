@@ -1,4 +1,5 @@
 import json
+from typing import List
 
 import pika
 
@@ -39,6 +40,18 @@ class RabbitmqHandler:
                 port=self.rabbitmq_port
             )
         )
+
+    def create_queues(self, queue_names: List[str]):
+        channel = self.connection.channel()
+        channel.basic_qos(
+            prefetch_count=1
+        )
+
+        for name in queue_names:
+            channel.queue_declare(
+                queue=name,
+                durable=True
+            )
 
     def create_channel(self):
         channel = self.connection.channel()
