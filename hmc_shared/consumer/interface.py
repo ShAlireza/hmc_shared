@@ -1,3 +1,5 @@
+import json
+
 from hmc_shared.utils import RabbitmqHandler
 
 
@@ -13,7 +15,7 @@ class Consumer:
         self.rabbitmq_handler.pull(self.kind, self.callback)
 
     def callback(self, ch, method, properties, body):
-        self.process(body)
+        self.process(json.loads(body.decode('utf-8')))
         ch.basic_ack(delivery_tag=method.delivery_tag)
 
     def process(self, data):
