@@ -18,6 +18,8 @@ class Consumer:
             rabbitmq_host=rabbitmq_host,
             rabbitmq_port=rabbitmq_port
         )
+
+    def consume(self):
         self.rabbitmq_handler.pull(self.kind, self.callback)
 
     def callback(self, ch, method, properties, body):
