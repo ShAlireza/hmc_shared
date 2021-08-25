@@ -10,7 +10,7 @@ def request(
         headers: Dict[str, Union[str, int, float]] = None,
         cookies: Dict[str, Union[str, int, float]] = None,
         retry_count: int = 0
-) -> Tuple[Dict[str, Any], int]:
+) -> requests.Response:
     params = {} if not params else params
     json = {} if not json else json
 
