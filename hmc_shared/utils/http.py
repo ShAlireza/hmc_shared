@@ -16,7 +16,7 @@ def request(
 
     assert retry_count >= 0, "retry_count must be non-negative"
 
-    data = None
+    response = None
     while retry_count > -1:
         response = requests.request(
             method=method,
@@ -29,7 +29,6 @@ def request(
         status_code = response.status_code
         retry_count -= 1
         if 200 <= status_code < 300:
-            data = response.json()
             break
 
-    return data, status_code
+    return response
