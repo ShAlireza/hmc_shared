@@ -3,6 +3,12 @@ import json
 from hmc_shared.utils import RabbitmqHandler
 
 
+class ConsumerKinds:
+    DIVAR = 'divar'
+    BAMA = 'bama'
+    SHEYPOOR = 'sheypoor'
+
+
 class Consumer:
     def __init__(self, *args, **kwargs):
         self.kind = kwargs.get('kind')
@@ -20,4 +26,3 @@ class Consumer:
 
     def process(self, data):
         raise NotImplementedError
-
