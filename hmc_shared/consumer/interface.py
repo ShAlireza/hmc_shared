@@ -23,8 +23,8 @@ class Consumer:
         self.rabbitmq_handler.pull(self.kind, self.callback)
 
     def callback(self, ch, method, properties, body):
-        self.process(json.loads(body.decode('utf-8')))
         ch.basic_ack(delivery_tag=method.delivery_tag)
+        self.process(json.loads(body.decode('utf-8')))
 
     def process(self, data):
         raise NotImplementedError
