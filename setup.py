@@ -13,7 +13,9 @@ setup(
     install_requires=[
         'requests>=2.25.1',
         'aiohttp>=3.7.4.post0',
-        'pika'
+        'pika',
+        'torpy',
+        'pysocks'
     ],
 
     classifiers=[
