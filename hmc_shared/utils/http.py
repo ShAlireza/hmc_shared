@@ -1,8 +1,6 @@
 import requests
 from typing import Union, Any, Tuple, Dict
 
-from torpy.http.requests import TorRequests
-
 
 def request(
         method: str,
@@ -13,7 +11,7 @@ def request(
         cookies: Dict[str, Union[str, int, float]] = None,
         retry_count: int = 0,
         proxies: Dict[str, str] = None,
-        use_tor: bool = False
+        use_tor: bool = True
 ) -> requests.Response:
     params = {} if not params else params
     json = {} if not json else json
@@ -23,28 +21,15 @@ def request(
     response = None
     while retry_count > -1:
 
-        if not use_tor:
-            response = requests.request(
-                method=method,
-                url=url,
-                params=params,
-                json=json,
-                headers=headers,
-                cookies=cookies,
-                proxies=proxies
-            )
-        else:
-            with TorRequests() as tor_requests:
-                with tor_requests.get_session() as sess:
-                    response = sess.request(
-                        method=method,
-                        url=url,
-                        params=params,
-                        json=json,
-                        headers=headers,
-                        cookies=cookies,
-                        proxies=proxies
-                    )
+        response = requests.request(
+            method=method,
+            url=url,
+            params=params,
+            json=json,
+            headers=headers,
+            cookies=cookies,
+            proxies=proxies
+        )
         status_code = response.status_code
         retry_count -= 1
         if 200 <= status_code < 300:
